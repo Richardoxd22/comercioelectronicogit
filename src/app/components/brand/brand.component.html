@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-header">
+    Marcas
+  </div>
+  <div class="card-body">
+    <ng-container *ngIf="brands.length > 0 else noData"></ng-container>
+    <table>
+      <tr>
+        <th>Código</th>
+        <th>Descripcion</th>
+      </tr>
+      <tr *ngFor="let brand of brands">
+        <td>{{brand.code}}</td>
+        <td>{{brand.description}}</td>
+        <td>
+          <button type="button" class="btn btn-primary"(click)="editBrand(brand.code, content)">Editar</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<ng-template #noData>No existe datos</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Marca</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    
+    
+  <div>
+  <form id="brandForm" [formGroup]="formulario" (ngSubmit)="updateBrand(content)">
+      <!-- los controles osea las variables que tenemos  -->
+      <div class="form-group">
+        <label for="code">Código</label>
+        <input type="text" formControlName="code" id="code" class="form-control">
+        <div *ngIf="formulario.controls['code'].invalid && (formulario.controls['code'].dirty || formulario.controls['code'].touched )" >
+            <small class="text-danger" *ngIf="formulario.controls['code'].errors?.['required']">
+                El campo codigo es requerido
+            </small>
+            <small class="text-danger" *ngIf="formulario.controls['code'].errors?.['pattern']">
+                solo letras
+            </small>
+        </div>
+       <br>
+    </div>
+      <div class="form-group">
+          <label for="description">Descripción</label>
+          <input type="text" formControlName="description" id="description" class="form-control">
+          <div *ngIf="formulario.controls['description'].invalid && (formulario.controls['description'].dirty || formulario.controls['description'].touched )" >
+              <small class="text-danger" *ngIf="formulario.controls['description'].errors?.['required']">
+                  El campo codigo es requerido
+              </small>
+              <small class="text-danger" *ngIf="formulario.controls['description'].errors?.['pattern']">
+                  solo letras
+              </small>
+          </div>
+         
+      </div>
+      <br>
+
+      <button class="btn btn-danger"  (click)="modal.close('Save click')">Cancelar</button>
+      <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+  </div>
+
+
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div> -->
+</ng-template>

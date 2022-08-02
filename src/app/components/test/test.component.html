@@ -1,0 +1,20 @@
+<div>
+    <input type="text" [value]="inputName" (keyup)="actualizarInputName($event)">
+    <button (click)="agregarNombre()"> agregar nombre</button>
+</div>
+<p>(click)="onNombreClic()">Hola {{nombre}}{{apellido}}</p>
+
+<ul>
+    <li>{{numeros[0]}}</li>
+    <li>{{numeros[1]}}</li>
+    <li>{{numeros[2]}}</li>
+</ul>
+<ul>
+    <!-- <li class="list-unstyled" *ngFor="let item of brand">
+        {{item.code}} - {{item.description}}
+    </li>
+    <li *ngFor="let item of cart">
+        {{item.name}} - $ {{item.price}} - {{item.cantProduct}}        
+    </li>     -->
+</ul>
+
