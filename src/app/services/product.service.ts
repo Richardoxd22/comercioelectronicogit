@@ -1,15 +1,13 @@
-import { Injectable,Inject } from '@angular/core';
-import {HttpClient,HttpErrorResponse,HttpHeaders, HttpParams} from '@angular/common/http';
-import { catchError, from, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { catchError, Observable } from 'rxjs';
 import { BASE_URL } from '../models/constanst';
 import { GlobalParams } from '../models/globalParams';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BrandService {
-  // baseUrl='https://localhost:44316';
-  // baseUrl= environment.baseUrl;
+export class ProductService {
 
   endpoint:string='';
   headers= new HttpHeaders().set('Content-Type', 'application/json');
@@ -18,10 +16,10 @@ export class BrandService {
     this.endpoint=endpoint;
    }
 
-  getBrands(globalParams:GlobalParams):Observable<any>{
+  getProducts(globalParams:GlobalParams):Observable<any>{
 
 
-    let apiUrl=`${this.endpoint}/api/Brand`;
+    let apiUrl=`${this.endpoint}/api/Product`;
     let params= new HttpParams();
 
     if(globalParams.search){
@@ -49,24 +47,24 @@ export class BrandService {
 
   }
 
-  getBrandsById(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand/${code}`;
+  getProductById(id:string):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/Product/${id}`;
     console.log(apiUrl);    
     return this.http.get(apiUrl);
   }
   
-  createBrand(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand`;
+  createProduct(data:any):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/Product`;
     console.log(apiUrl);    
     return this.http.post(apiUrl,data).pipe(catchError(this.error));
   }
-  updateBrand(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand`;
+  updateProduct(data:any):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/Product`;
     return this.http.put(apiUrl,data).pipe(catchError(this.error));
   }
 
-  deleteBrand(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand${code}`;
+  deleteProduct(id:number):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/Product${id}`;
     return this.http.delete(apiUrl).pipe(catchError(this.error));
   }
   error(error:HttpErrorResponse){

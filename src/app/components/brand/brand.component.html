@@ -1,7 +1,5 @@
 <div class="card">
-  <div class="card-header">
-    Marcas
-  </div>
+  <div class="card-header" align="center"><b>Marca</b></div>
   <div class="card-body">
     <ng-container *ngIf="brands.length > 0 else noData"></ng-container>
     <table>
@@ -13,9 +11,9 @@
       <tr *ngFor="let brand of brands">
         <td>{{brand.code}}</td>&nbsp;
         <td>{{brand.description}}</td>&nbsp;
-        <td>
-          <button type="button" class="btn btn-success"(click)="editBrand(brand.code, content)">Agregar</button>
+        <td>          
           <button type="button" class="btn btn-primary"(click)="editBrand(brand.code, content)">Editar</button>
+          <button type="button" class="btn btn-danger"(click)="deleteBrand(brand.code, content)">Eliminar</button>
         </td>
       </tr>
     </table>

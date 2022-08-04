@@ -7,9 +7,7 @@ import { GlobalParams } from '../models/globalParams';
 @Injectable({
   providedIn: 'root'
 })
-export class BrandService {
-  // baseUrl='https://localhost:44316';
-  // baseUrl= environment.baseUrl;
+export class ProductTypeService {
 
   endpoint:string='';
   headers= new HttpHeaders().set('Content-Type', 'application/json');
@@ -18,10 +16,10 @@ export class BrandService {
     this.endpoint=endpoint;
    }
 
-  getBrands(globalParams:GlobalParams):Observable<any>{
+  getproducttypes(globalParams:GlobalParams):Observable<any>{
 
 
-    let apiUrl=`${this.endpoint}/api/Brand`;
+    let apiUrl=`${this.endpoint}/api/ProductType`;
     let params= new HttpParams();
 
     if(globalParams.search){
@@ -49,24 +47,24 @@ export class BrandService {
 
   }
 
-  getBrandsById(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand/${code}`;
+  getproducttypesById(code:number):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/ProductType/${code}`;
     console.log(apiUrl);    
     return this.http.get(apiUrl);
   }
   
-  createBrand(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand`;
+  createproducttype(data:any):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/ProductType`;
     console.log(apiUrl);    
     return this.http.post(apiUrl,data).pipe(catchError(this.error));
   }
-  updateBrand(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand`;
+  updateproducttype(data:any):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/ProductType`;
     return this.http.put(apiUrl,data).pipe(catchError(this.error));
   }
 
-  deleteBrand(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand${code}`;
+  deleteproducttype(code:number):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/ProductType${code}`;
     return this.http.delete(apiUrl).pipe(catchError(this.error));
   }
   error(error:HttpErrorResponse){

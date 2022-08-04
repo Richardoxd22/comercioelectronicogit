@@ -1,1 +1,73 @@
-<p>product-type works!</p>
+<div class="card">
+    <div class="card-header" align="center"><b>Marca</b></div>
+    <div class="card-body">
+      <ng-container *ngIf="producttypes.length > 0 else noData"></ng-container>
+      <table>
+        <tr>
+          <th>Código</th>&nbsp;
+          <th>Descripción</th>&nbsp;
+          <th>Acciones</th>&nbsp;
+        </tr>
+        <tr *ngFor="let producttype of producttypes">
+          <td>{{producttype.code}}</td>&nbsp;
+          <td>{{producttype.description}}</td>&nbsp;
+          <td>          
+            <button type="button" class="btn btn-primary"(click)="editproducttype(producttype.code, content)">Editar</button>
+            <!-- <button type="button" class="btn btn-danger"(click)="deleteBrand(producttype.code, content)">Eliminar</button> -->
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <ng-template #noData>No existe datos</ng-template>
+  
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Marca</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      
+      
+    <div>
+    <form id="producttypeForm" [formGroup]="formulario" (ngSubmit)="updateproducttype(content)">
+        <!-- los controles osea las variables que tenemos  -->
+        <div class="form-group">
+          <label for="code">Código</label>
+          <input type="text" formControlName="code" id="code" class="form-control">
+          <div *ngIf="formulario.controls['code'].invalid && (formulario.controls['code'].dirty || formulario.controls['code'].touched )" >
+              <small class="text-danger" *ngIf="formulario.controls['code'].errors?.['required']">
+                  El campo codigo es requerido
+              </small>
+              <small class="text-danger" *ngIf="formulario.controls['code'].errors?.['pattern']">
+                  solo letras
+              </small>
+          </div>
+         <br>
+      </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="text" formControlName="description" id="description" class="form-control">
+            <div *ngIf="formulario.controls['description'].invalid && (formulario.controls['description'].dirty || formulario.controls['description'].touched )" >
+                <small class="text-danger" *ngIf="formulario.controls['description'].errors?.['required']">
+                    El campo codigo es requerido
+                </small>
+                <small class="text-danger" *ngIf="formulario.controls['description'].errors?.['pattern']">
+                    solo letras
+                </small>
+            </div>
+           
+        </div>
+        <br>
+  
+        <button class="btn btn-danger"  (click)="modal.close('Save click')">Cancelar</button>&nbsp;
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </form>
+    </div>
+  
+  
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+  </ng-template>

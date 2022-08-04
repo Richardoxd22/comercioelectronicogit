@@ -47,7 +47,7 @@ import { DeliverymodeComponent } from './components/deliverymode/deliverymode.co
   ],
   providers: [
     {
-      provide:BASE_URL, useValue:(environment.baseUrl.length> 0 ? environment.baseUrl :'https://localhost:44316')
+      provide:BASE_URL, useValue:(environment.baseUrl.length > 0 ? environment.baseUrl : 'https://localhost:5000')
     },
     {
       provide:HTTP_INTERCEPTORS,useClass:JwtInterceptor,multi:true

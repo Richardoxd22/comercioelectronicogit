@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
     })
   }
   AcessLogin(){
-    let apiUrlLog = `${this.endpoint}/api/Token`;
-    this.http.get<any>(apiUrlLog)
+    let apiUrlLog = `${this.endpoint}/api/Token`
+    this.http.get<any>("https://localhost:44316/api/Token")
     .subscribe(res=>{
       const user = res.find((a:any)=>{
         return a.usuario ===this.formulariologin.value.usuario  && a.contrasena ===this.formulariologin.value.contrasena 
