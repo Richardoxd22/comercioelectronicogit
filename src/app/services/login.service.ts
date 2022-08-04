@@ -11,14 +11,14 @@ import { BASE_URL } from '../models/constanst';
 export class LoginService {
   
   endpoint:string='';
-  headers=new HttpHeaders().set('Content-Type', 'applycation/json');
+  headers=new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http:HttpClient,
     @Inject(BASE_URL)endpoint:string) {
       this.endpoint=endpoint;
      }
 
   enviarLogin(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}`;
+    let apiUrl=`${this.endpoint}/api/Token`;
     return this.http.post(apiUrl,data).pipe(catchError(this.error));
 
   }

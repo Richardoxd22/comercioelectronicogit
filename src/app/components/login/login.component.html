@@ -1,11 +1,11 @@
-<div class="card">
+<!-- <div class="card">
     <div class="card-header">Login</div>
     <div class="card-body">
         <ng-container>
 
-        </ng-container>   
+        </ng-container>    -->
         <!-- <form id="LoginForm" [formGroup]="formulariologin" (ngSubmit)="AccesLogin(content)"></form>      -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="userName">Usuario</label>
                 <input type="text" formControlName="userName" id="userName" class="form-control">
                 <div *ngIf="formulariologin.controls['code'].invalid && (formulariologin.controls['code'].dirty || formulariologin.controls['code'].touched )" >
@@ -31,4 +31,20 @@
                     <br>
                     <button class="btn btn-success" >Ingresar</button>
     </div>
-</div>
+</div> -->
+<form [formGroup]="formulariologin" (ngSubmit)="AcessLogin()" >
+    <div class="mb-3">
+        <label for="InputUserName" class="form-label">Usuario</label>
+        <input formControlName="usuario" id="InputUserName" type="text" class="form-control" placeholder="Ingrese su usuario">        
+    </div>
+
+
+    <div class="mb-3">
+        <label for="InputPassword" class="form-label">Contraseña</label>
+        <input formControlName="contrasena" id="InputPassword" type="text" class="form-control" placeholder="Ingrese su contraseña">        
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-success">Ingresar</button>
+    <button routerLink="/" class="btn btn-danger">Cerrar</button>
+</form>

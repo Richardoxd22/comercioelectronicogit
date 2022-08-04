@@ -21,7 +21,7 @@ export class BrandComponent implements OnInit {
      this.brandService.getBrands(new GlobalParams()).subscribe(response => {
       this.brands=response;
     });
-    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbiIsImp0aSI6IjdkNTU2ZTY4LWYyZDMtNDViOC04Mjk4LTU3Yzg2MDY5ZmQxYSIsImlhdCI6IjAxLWFnby4tMjIgODo1MzoyMyBQTSIsIlVzZXJOYW1lIjoiQWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY1OTM4NzgwMywiaXNzIjoiQ3Vyc28tTmV0LUJhc2ljbyIsImF1ZCI6IkFwaS1DdXJzbyJ9.eaK7VtnSxpR3tLYZjxM69-3EAwnQBjz05DgiCRg4Vso')
+    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbiIsImp0aSI6IjhiNjQzNTU4LWQ1OTItNDYxNy04ODI0LTQ2M2IyYWQ0NzBmMSIsImlhdCI6IjA0LWFnby4tMjIgMzoxMDoyMSBBTSIsIlVzZXJOYW1lIjoiQWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY1OTU4MzIyMSwiaXNzIjoiQ3Vyc28tTmV0LUJhc2ljbyIsImF1ZCI6IkFwaS1DdXJzbyJ9.tBhH6-7SdnDnJRPEeAYz2PG8PXf7YghwmPGhcuJSdxs')
   }
   editBrand(code:number ,content:any){
     this.brandService.getBrandsById(code).subscribe(
@@ -32,6 +32,18 @@ export class BrandComponent implements OnInit {
         this.modalService.open(content,{ariaLabelledBy:'modal-basic-title'})        
       }
     );        
+  }
+
+  createBrand(content:any){
+    if(this.formulario.invalid){
+      return;
+    }
+    console.log(this.formulario.value);
+    this.brandService.createBrand(this.formulario.value).subscribe(
+      response=>console.log(response)
+      
+    );
+
   }
 
   buildForm(){
@@ -46,9 +58,7 @@ export class BrandComponent implements OnInit {
     if(this.formulario.invalid){
       return;
     }
-
     console.log(this.formulario.value);
-    
     this.brandService.updateBrand(this.formulario.value).subscribe(
       response=> console.log(response)      
     );

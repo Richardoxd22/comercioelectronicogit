@@ -6,13 +6,15 @@
     <ng-container *ngIf="brands.length > 0 else noData"></ng-container>
     <table>
       <tr>
-        <th>Código</th>
-        <th>Descripcion</th>
+        <th>Código</th>&nbsp;
+        <th>Descripción</th>&nbsp;
+        <th>Acciones</th>&nbsp;
       </tr>
       <tr *ngFor="let brand of brands">
-        <td>{{brand.code}}</td>
-        <td>{{brand.description}}</td>
+        <td>{{brand.code}}</td>&nbsp;
+        <td>{{brand.description}}</td>&nbsp;
         <td>
+          <button type="button" class="btn btn-success"(click)="editBrand(brand.code, content)">Agregar</button>
           <button type="button" class="btn btn-primary"(click)="editBrand(brand.code, content)">Editar</button>
         </td>
       </tr>
@@ -60,7 +62,7 @@
       </div>
       <br>
 
-      <button class="btn btn-danger"  (click)="modal.close('Save click')">Cancelar</button>
+      <button class="btn btn-danger"  (click)="modal.close('Save click')">Cancelar</button>&nbsp;
       <button class="btn btn-primary" type="submit">Enviar</button>
     </form>
   </div>
