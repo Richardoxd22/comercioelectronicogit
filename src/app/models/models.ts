@@ -12,6 +12,8 @@
         price: number;
         productType: string;
         brand: string;
+        productTypeId: string;
+        brandId: string;
         numStock: number;
     }
 
@@ -20,4 +22,23 @@
         code: number;
         description: string;
         creationDate: Date;
+    }
+
+    
+    export interface DeliveryModeDto {
+        id: number;
+        name: string;
+        description: string;
+    }
+
+    export interface CartDto {
+        id: string;
+        productId: string;
+        deliveryModeId: string;
+        price: number;
+        cantProduct: number;
+        name: string;
+        cartResult: number;
+        cantStock: number;
+        stock: boolean;
     }

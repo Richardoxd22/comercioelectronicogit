@@ -66,8 +66,14 @@ export class BrandService {
   }
 
   deleteBrand(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/Brand${code}`;
-    return this.http.delete(apiUrl).pipe(catchError(this.error));
+    let apiUrl=`${this.endpoint}/api/Brand/${code}`;
+    console.log(apiUrl);    
+    return this.http.delete(apiUrl);
+  }
+
+  DeleteBrandById(code:number){
+    let param = new HttpParams().set('code',code);
+    return this.http.delete(`${this.endpoint}/api/Brand`,{params:param})
   }
   error(error:HttpErrorResponse){
     let errorMessage ='';

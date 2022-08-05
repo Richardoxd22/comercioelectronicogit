@@ -7,7 +7,9 @@ import { GlobalParams } from '../models/globalParams';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductTypeService {
+export class DeliverymodeService {
+// baseUrl='https://localhost:44316';
+  // baseUrl= environment.baseUrl;
 
   endpoint:string='';
   headers= new HttpHeaders().set('Content-Type', 'application/json');
@@ -16,10 +18,10 @@ export class ProductTypeService {
     this.endpoint=endpoint;
    }
 
-  getproducttypes(globalParams:GlobalParams):Observable<any>{
+  getdeliveryModes(globalParams:GlobalParams):Observable<any>{
 
 
-    let apiUrl=`${this.endpoint}/api/ProductType`;
+    let apiUrl=`${this.endpoint}/api/DeliveryMode`;
     let params= new HttpParams();
 
     if(globalParams.search){
@@ -47,25 +49,25 @@ export class ProductTypeService {
 
   }
 
-  getproducttypesById(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/ProductType/${code}`;
+  getdeliveryModesById(id:number):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/DeliveryMode/${id}`;
     console.log(apiUrl);    
     return this.http.get(apiUrl);
   }
   
-  createproducttype(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/ProductType`;
+  createdeliveryMode(data:any):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/DeliveryMode`;
     console.log(apiUrl);    
     return this.http.post(apiUrl,data).pipe(catchError(this.error));
   }
-  updateproducttype(data:any):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/ProductType`;
+  updatedeliveryMode(data:any):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/DeliveryMode`;
     return this.http.put(apiUrl,data).pipe(catchError(this.error));
   }
 
-  deleteproducttype(code:number):Observable<any>{
-    let apiUrl=`${this.endpoint}/api/ProductType/${code}`;
-    return this.http.delete(apiUrl);
+  deletedeliveryMode(id:number):Observable<any>{
+    let apiUrl=`${this.endpoint}/api/DeliveryMode${id}`;
+    return this.http.delete(apiUrl).pipe(catchError(this.error));
   }
   error(error:HttpErrorResponse){
     let errorMessage ='';

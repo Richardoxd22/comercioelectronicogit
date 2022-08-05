@@ -24,7 +24,7 @@ export class BrandComponent implements OnInit {
      this.brandService.getBrands(new GlobalParams()).subscribe(
       data => this.brands=data
     );
-    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbiIsImp0aSI6IjNmZmUwNGJkLWYyNWQtNDE3MC1hYzNjLTQ0MzQ5NjM2NWNiNCIsImlhdCI6IjA0LWFnby4tMjIgNDozMToxNCBQTSIsIlVzZXJOYW1lIjoiQWRtaW4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTY1OTYzMTI3NCwiaXNzIjoiQ3Vyc28tTmV0LUJhc2ljbyIsImF1ZCI6IkFwaS1DdXJzbyJ9.4WzSXDgeJhRb90ljJdVn5s96V7gr2fHjRGpzOEiqdHE')
+    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyaWNoIiwianRpIjoiYWE0NWI1ZTEtYzRiOS00MjMwLTliNzUtZjdkMDhlMTQyMGZlIiwiaWF0IjoiMDQtYWdvLi0yMiAxMDo0Nzo0MiBQTSIsIlVzZXJOYW1lIjoicmljaCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZXhwIjoxNjU5NjUzODYyLCJpc3MiOiJDdXJzby1OZXQtQmFzaWNvIiwiYXVkIjoiQXBpLUN1cnNvIn0.9nHCuQRjEStM6gg2dLOyAGpj4ryutwvlZHQMb5qNPW8')
   }
   editBrand(code:number ,content:any){
     this.brandService.getBrandsById(code).subscribe(
@@ -43,8 +43,7 @@ export class BrandComponent implements OnInit {
     }
     console.log(this.formulario.value);
     this.brandService.createBrand(this.formulario.value).subscribe(
-      response=>console.log(response)
-      
+      response=>console.log(response)      
     );
 
   }
@@ -66,16 +65,42 @@ export class BrandComponent implements OnInit {
       response=> console.log(response)      
     );
   }
-  deleteBrand(brandId: number, content :any){
+ 
+  deleteBrand(code: number, content :any){
     if(this.formulario.invalid){
       return;
-    }
+    }    
+    this.brandService.getBrandsById(code).subscribe(
+      response=> {
+        this.selectedBrand = response;
+        console.log(this.selectedBrand);
+        this.buildForm();
+        this.brandService.deleteBrand(this.formulario.value).subscribe(
+        response=>console.log(response)      
+        );
+      }
+    );    
+
     
-    console.log(this.formulario.value);
-    this.brandService.deleteBrand(this.formulario.value).subscribe(
-      response=>console.log(response)
       
-    );
+    
+    // console.log(this.formulario.value);
+    // this.brandService.deleteBrand(this.formulario.value).subscribe(
+    //   response=>console.log(response)      
+    // );
   }
+
+
+  Delete(code:number){
+    this.brandService.DeleteBrandById(code).subscribe(item=>{
+      console.log(item);
+      if(item){
+        window.location.reload();
+      }
+    });
+  }
+  
+
+
   
 }

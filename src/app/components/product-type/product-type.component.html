@@ -1,8 +1,16 @@
+<style>
+  h2{text-align: center;}
+  
+</style>
+<div class="d-flex flex-column flex-md-row align-items-center p-3  px-md-4 mb-3 bg-white border-bottom shadow-sm ">
+  <img src="/assets/img/marcas.jpg" style="max-height: 300px;"  class="center">
+  
+</div>
 <div class="card">
-    <div class="card-header" align="center"><b>Marca</b></div>
+    <div class="card-header" align="center"><b>Tipo de producto</b></div>
     <div class="card-body">
       <ng-container *ngIf="producttypes.length > 0 else noData"></ng-container>
-      <table>
+      <table class="tb">
         <tr>
           <th>Código</th>&nbsp;
           <th>Descripción</th>&nbsp;
@@ -13,7 +21,7 @@
           <td>{{producttype.description}}</td>&nbsp;
           <td>          
             <button type="button" class="btn btn-primary"(click)="editproducttype(producttype.code, content)">Editar</button>
-            <!-- <button type="button" class="btn btn-danger"(click)="deleteBrand(producttype.code, content)">Eliminar</button> -->
+            <button type="button" class="btn btn-danger"(click)="deleteproducttype(producttype.code, content)">Eliminar</button>
           </td>
         </tr>
       </table>
@@ -23,14 +31,14 @@
   
   <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Marca</h4>
+      <h4 class="modal-title" id="modal-basic-title">Typo de Producto</h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
       
       
     <div>
-    <form id="producttypeForm" [formGroup]="formulario" (ngSubmit)="updateproducttype(content)">
+    <form id="producttypeForm" [formGroup]="formulario" (ngSubmit)="updateproducttype(content)" >
         <!-- los controles osea las variables que tenemos  -->
         <div class="form-group">
           <label for="code">Código</label>
@@ -62,6 +70,7 @@
   
         <button class="btn btn-danger"  (click)="modal.close('Save click')">Cancelar</button>&nbsp;
         <button class="btn btn-primary" type="submit">Enviar</button>
+        <button class="btn btn-danger" type="submit">Eliminar</button>
       </form>
     </div>
   

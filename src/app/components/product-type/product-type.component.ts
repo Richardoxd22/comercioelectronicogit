@@ -50,8 +50,7 @@ export class ProductTypeComponent implements OnInit {
 
   buildForm(){
     this.formulario =this.formBuilder.group({
-      code:[{value: this.selectedproducttype.code, disabled: false}, [Validators.required, Validators.maxLength(4)]],
-      // code:[this.selectedproducttype.code,[Validators.required,Validators.maxLength(4)]],
+      code:[ this.selectedproducttype.code, [Validators.required, Validators.maxLength(4)]],      
       description:[this.selectedproducttype.description,[ Validators.required, Validators.pattern(/^[a-zA-Z0-9-_\s]+$/)]],      
     });
   }
@@ -65,16 +64,15 @@ export class ProductTypeComponent implements OnInit {
       response=> console.log(response)      
     );
   }
-  deleteproducttype(brandId: number, content :any){
-    if(this.formulario.invalid){
-      return;
-    }
-    
-    console.log(this.formulario.value);
-    this.producttypeService.deleteproducttype(this.formulario.value).subscribe(
-      response=>console.log(response)
-      
-    );
+  deleteproducttype(code: number, content :any){
+  
+    this.producttypeService.deleteproducttype(code).subscribe(
+      response=> {
+        this.selectedproducttype = response;
+        console.log(this.selectedproducttype);
+        this.buildForm();        
+      }
+    ); 
   }
   
 }

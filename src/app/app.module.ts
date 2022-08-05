@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {JwtModule} from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { BrandComponent } from './components/brand/brand.component';
@@ -22,6 +23,9 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DeliverymodeComponent } from './components/deliverymode/deliverymode.component';
 
+export function tokenGetter(){
+  return localStorage.getItem("token")
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +47,8 @@ import { DeliverymodeComponent } from './components/deliverymode/deliverymode.co
     FormsModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [
     {
